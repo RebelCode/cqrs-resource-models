@@ -8,6 +8,7 @@ use Dhii\Expression\LogicalExpressionInterface;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\Output\TemplateInterface;
 use Dhii\Storage\Resource\SelectCapableInterface;
+use Dhii\Util\Normalization\NormalizeArrayCapableTrait;
 use Dhii\Util\Normalization\NormalizeStringCapableTrait;
 use Dhii\Util\String\StringableInterface as Stringable;
 use PDO;
@@ -26,6 +27,9 @@ use RebelCode\Storage\Resource\Pdo\Query\RenderSqlConditionCapableTrait;
  * This generic implementation can be instantiated to SELECT from any number of tables and with any number of JOIN
  * conditions. An optional field-to-column map may be provided which is used to translate consumer-friendly field names
  * to their actual column counterpart names.
+ *
+ * This implementation is also dependent on only a single template for rendering SQL conditions. The template instance
+ * must be able to render any condition type. A delegate template is recommended.
  *
  * @since [*next-version*]
  */
@@ -101,12 +105,61 @@ class PdoSelectResourceModel implements SelectCapableInterface
      */
     use PdoAwareTrait;
 
+    /*
+     * Provides SQL table list storage functionality.
+     *
+     * @since [*next-version*]
+     */
+    use SqlTablesAwareTrait;
+
+    /*
+     * Provides SQL field-to-column map storage functionality.
+     *
+     * @since [*next-version*]
+     */
+    use SqlFieldColumnMapAwareTrait;
+
+    /*
+     * Provides SQL field name list storage functionality.
+     *
+     * @since [*next-version*]
+     */
+    use SqlFieldNamesAwareTrait;
+
+    /*
+     * Provides SQL column name list storage functionality.
+     *
+     * @since [*next-version*]
+     */
+    use SqlColumnNamesAwareTrait;
+
+    /*
+     * Provides SQL join condition list storage functionality.
+     *
+     * @since [*next-version*]
+     */
+    use SqlJoinConditionsAwareTrait;
+
+    /*
+     * Provides SQL condition template storage functionality.
+     *
+     * @since [*next-version*]
+     */
+    use SqlConditionTemplateAwareTrait;
+
     /**
      * Provides string normalization functionality.
      *
      * @since [*next-version*]
      */
     use NormalizeStringCapableTrait;
+
+    /**
+     * Provides array normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeArrayCapableTrait;
 
     /**
      * Provides functionality for creating invalid argument exceptions.
@@ -130,42 +183,6 @@ class PdoSelectResourceModel implements SelectCapableInterface
     const JOIN_MODE = 'LEFT';
 
     /**
-     * The condition template to use for rendering conditions.
-     *
-     * @since [*next-version*]
-     *
-     * @var TemplateInterface
-     */
-    protected $conditionTemplate;
-
-    /**
-     * The tables from which to SELECT from.
-     *
-     * @since [*next-version*]
-     *
-     * @var string|Stringable[]
-     */
-    protected $tables;
-
-    /**
-     * A map of field names to table column names.
-     *
-     * @since [*next-version*]
-     *
-     * @var string[]|Stringable[]
-     */
-    protected $fieldColumnMap;
-
-    /**
-     * A list of JOIN expressions to use in SELECT queries.
-     *
-     * @since [*next-version*]
-     *
-     * @var LogicalExpressionInterface[]
-     */
-    protected $joins;
-
-    /**
      * Constructor.
      *
      * @since [*next-version*]
@@ -179,10 +196,10 @@ class PdoSelectResourceModel implements SelectCapableInterface
     public function __construct(PDO $pdo, TemplateInterface $conditionTemplate, $tables, $fieldColumnMap, $joins = [])
     {
         $this->_setPdo($pdo);
-        $this->conditionTemplate = $conditionTemplate;
-        $this->tables = $tables;
-        $this->fieldColumnMap = $fieldColumnMap;
-        $this->joins = $joins;
+        $this->_setSqlConditionTemplate($conditionTemplate);
+        $this->_setSqlTables($tables);
+        $this->_setSqlFieldColumnMap($fieldColumnMap);
+        $this->_setSqlJoinConditions($joins);
     }
 
     /**
@@ -202,7 +219,7 @@ class PdoSelectResourceModel implements SelectCapableInterface
      */
     protected function _getSqlSelectTables()
     {
-        return $this->tables;
+        return $this->_getSqlTables();
     }
 
     /**
@@ -210,9 +227,9 @@ class PdoSelectResourceModel implements SelectCapableInterface
      *
      * @since [*next-version*]
      */
-    protected function _getSqlSelectColumns()
+    protected function _getTemplateForSqlCondition(LogicalExpressionInterface $condition)
     {
-        return array_values($this->fieldColumnMap);
+        return $this->_getSqlConditionTemplate();
     }
 
     /**
@@ -222,7 +239,17 @@ class PdoSelectResourceModel implements SelectCapableInterface
      */
     protected function _getSqlSelectFieldNames()
     {
-        return array_keys($this->fieldColumnMap);
+        return $this->_getSqlFieldNames();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    protected function _getSqlSelectColumns()
+    {
+        return $this->_getSqlColumnNames();
     }
 
     /**
@@ -232,7 +259,7 @@ class PdoSelectResourceModel implements SelectCapableInterface
      */
     protected function _getSqlSelectJoinConditions()
     {
-        return $this->joins;
+        return $this->_getSqlJoinConditions();
     }
 
     /**
@@ -243,25 +270,5 @@ class PdoSelectResourceModel implements SelectCapableInterface
     protected function _getSqlJoinType(ExpressionInterface $expression)
     {
         return 'INNER';
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @since [*next-version*]
-     */
-    protected function _getSqlConditionTemplate(LogicalExpressionInterface $condition)
-    {
-        return $this->conditionTemplate;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @since [*next-version*]
-     */
-    protected function _getSqlFieldColumnMap()
-    {
-        return $this->fieldColumnMap;
     }
 }

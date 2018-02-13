@@ -229,8 +229,8 @@ class PdoSelectResourceModelTest extends BaseDatabaseTestCase
             'id2'  => 'id_2',
         ];
         $joins = [
-            $this->createLogicalExpression(uniqid('type-'), []),
-            $this->createLogicalExpression(uniqid('type-'), []),
+            uniqid('table-') => $this->createLogicalExpression(uniqid('type-'), []),
+            uniqid('table-') => $this->createLogicalExpression(uniqid('type-'), []),
         ];
 
         $subject = new TestSubject($pdo, $template, $tables, $fcMap, $joins);

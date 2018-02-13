@@ -62,6 +62,9 @@
       <path value="$PROJECT_DIR$/vendor/dhii/exception-helper-base" />
       <path value="$PROJECT_DIR$/vendor/dhii/normalization-helper-base" />
       <path value="$PROJECT_DIR$/vendor/phpunit/dbunit" />
+      <path value="$PROJECT_DIR$/vendor/dhii/container-helper-base" />
+      <path value="$PROJECT_DIR$/vendor/dhii/data-container-abstract" />
+      <path value="$PROJECT_DIR$/vendor/dhii/data-container-base" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.4.0" />

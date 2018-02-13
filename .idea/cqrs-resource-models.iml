@@ -9,7 +9,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeclimate/php-test-reporter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/config-interface" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/container-helper-base" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/cqrs-resource-model-interface" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/data-container-abstract" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/data-container-base" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/data-container-interface" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/data-hierarchy-interface" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dhii/data-key-value-aware-interface" />

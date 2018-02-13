@@ -14,10 +14,12 @@
     "require": {
         "php": "^5.4 | ^7.0",
         "dhii/cqrs-resource-model-interface": "dev-task/initial-interfaces",
-        "rebelcode/cqrs-resource-models-abstract": "dev-task/add-wp-traits",
+        "rebelcode/cqrs-resource-models-abstract": "dev-task/finish-initial-classes",
         "dhii/normalization-helper-base": "^0.1",
         "dhii/exception-helper-base": "^0.1",
-        "dhii/i18n-helper-base": "^0.1"
+        "dhii/i18n-helper-base": "^0.1",
+        "dhii/container-helper-base": "^0.1",
+        "dhii/data-container-base": "^0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
