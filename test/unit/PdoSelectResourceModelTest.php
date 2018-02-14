@@ -234,31 +234,11 @@ class PdoSelectResourceModelTest extends BaseDatabaseTestCase
         ];
 
         $subject = new TestSubject($pdo, $template, $tables, $fcMap, $joins);
-        $reflect = $this->reflect($subject);
 
-        // Dummy condition - required for calling the SQL condition template getter method
-        $dummyCondition = $this->createLogicalExpression('', []);
-
-        $this->assertSame($pdo, $reflect->_getPdo(), 'Expected and retrieved PDO instances are not the same.');
-        $this->assertSame(
-            $template,
-            $reflect->_getSqlConditionTemplate($dummyCondition),
-            'Expected and retrieved SQL condition templates are not the same.'
-        );
-        $this->assertSame(
-            $tables,
-            $reflect->_getSqlSelectTables(),
-            'Expected and retrieved SELECT tables are not the same.'
-        );
-        $this->assertSame(
-            $fcMap,
-            $reflect->_getSqlFieldColumnMap(),
-            'Expected and retrieved field-column map are not the same.'
-        );
-        $this->assertSame(
-            $joins,
-            $reflect->_getSqlSelectJoinConditions(),
-            'Expected and retrieved JOIN conditions are not the same.'
+        $this->assertInstanceOf(
+            'Dhii\Storage\Resource\SelectCapableInterface',
+            $subject,
+            'Test subject does not implement expected interface.'
         );
     }
 
