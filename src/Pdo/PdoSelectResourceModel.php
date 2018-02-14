@@ -16,7 +16,6 @@ use RebelCode\Storage\Resource\Pdo\Query\BuildSelectSqlCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\BuildSqlJoinsCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\BuildSqlWhereClauseCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\EscapeSqlReferenceCapableTrait;
-use RebelCode\Storage\Resource\Pdo\Query\ExecutePdoQueryCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\GetPdoExpressionHashMapCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\GetPdoValueHashStringCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\RenderSqlConditionCapableTrait;
@@ -33,7 +32,7 @@ use RebelCode\Storage\Resource\Pdo\Query\RenderSqlConditionCapableTrait;
  *
  * @since [*next-version*]
  */
-class PdoSelectResourceModel implements SelectCapableInterface
+class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectCapableInterface
 {
     /*
      * Provides PDO SQL SELECT functionality.
@@ -90,20 +89,6 @@ class PdoSelectResourceModel implements SelectCapableInterface
      * @since [*next-version*]
      */
     use RenderSqlConditionCapableTrait;
-
-    /*
-     * Provides PDO query execution functionality.
-     *
-     * @since [*next-version*]
-     */
-    use ExecutePdoQueryCapableTrait;
-
-    /*
-     * Provides PDO instance storage functionality.
-     *
-     * @since [*next-version*]
-     */
-    use PdoAwareTrait;
 
     /*
      * Provides SQL table list storage functionality.
