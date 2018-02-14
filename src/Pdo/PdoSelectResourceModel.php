@@ -95,7 +95,7 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
      *
      * @since [*next-version*]
      */
-    use SqlTablesAwareTrait;
+    use SqlTableListAwareTrait;
 
     /*
      * Provides SQL field-to-column map storage functionality.
@@ -182,7 +182,7 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
     {
         $this->_setPdo($pdo);
         $this->_setSqlConditionTemplate($conditionTemplate);
-        $this->_setSqlTables($tables);
+        $this->_setSqlTableList($tables);
         $this->_setSqlFieldColumnMap($fieldColumnMap);
         $this->_setSqlJoinConditions($joins);
     }
@@ -204,7 +204,7 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
      */
     protected function _getSqlSelectTables()
     {
-        return $this->_getSqlTables();
+        return $this->_getSqlTableList();
     }
 
     /**

@@ -62,7 +62,7 @@ class PdoInsertResourceModel extends AbstractPdoResourceModel implements InsertC
      *
      * @since [*next-version*]
      */
-    use SqlTablesAwareTrait;
+    use SqlTableAwareTrait;
 
     /*
      * Provides SQL field-to-column map storage functionality.
@@ -144,7 +144,7 @@ class PdoInsertResourceModel extends AbstractPdoResourceModel implements InsertC
     public function __construct(PDO $pdo, $table, $fieldColumnMap)
     {
         $this->_setPdo($pdo);
-        $this->_setSqlTables([$table]);
+        $this->_setSqlTable($table);
         $this->_setSqlFieldColumnMap($fieldColumnMap);
     }
 
@@ -167,7 +167,7 @@ class PdoInsertResourceModel extends AbstractPdoResourceModel implements InsertC
      */
     protected function _getSqlInsertTable()
     {
-        return $this->_getSqlTables()[0];
+        return $this->_getSqlTable();
     }
 
     /**
