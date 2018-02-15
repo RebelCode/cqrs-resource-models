@@ -1,6 +1,6 @@
 <?php
 
-namespace RebelCode\Storage\Resource\UnitTest;
+namespace RebelCode\Storage\Resource\FuncTest;
 
 use Dhii\Util\String\StringableInterface;
 use Dhii\Util\String\StringableInterface as Stringable;
@@ -171,9 +171,9 @@ class PdoSelectResourceModelTest extends BaseDatabaseTestCase
      *
      * @since [*next-version*]
      *
-     * @param string|Stringable          $entity The entity name.
-     * @param string|Stringable          $field  The field name.
-     * @param string|StringableInterface $type   The term type.
+     * @param string|Stringable $entity The entity name.
+     * @param string|Stringable $field  The field name.
+     * @param string|Stringable $type   The term type.
      *
      * @return MockObject The created entity field term instance.
      */
