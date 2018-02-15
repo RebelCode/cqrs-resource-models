@@ -134,28 +134,28 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
      */
     use SqlExpressionTemplateAwareTrait;
 
-    /**
+    /*
      * Provides string normalization functionality.
      *
      * @since [*next-version*]
      */
     use NormalizeStringCapableTrait;
 
-    /**
+    /*
      * Provides array normalization functionality.
      *
      * @since [*next-version*]
      */
     use NormalizeArrayCapableTrait;
 
-    /**
+    /*
      * Provides functionality for creating invalid argument exceptions.
      *
      * @since [*next-version*]
      */
     use CreateInvalidArgumentExceptionCapableTrait;
 
-    /**
+    /*
      * Provides string translating functionality.
      *
      * @since [*next-version*]

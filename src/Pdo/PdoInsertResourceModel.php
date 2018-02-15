@@ -85,7 +85,7 @@ class PdoInsertResourceModel extends AbstractPdoResourceModel implements InsertC
      */
     use ContainerGetCapableTrait;
 
-    /**
+    /*
      * Provides functionality for checking for key existence in any kind of container.
      *
      * @since [*next-version*]
@@ -99,21 +99,21 @@ class PdoInsertResourceModel extends AbstractPdoResourceModel implements InsertC
      */
     use NormalizeContainerCapableTrait;
 
-    /**
+    /*
      * Provides string normalization functionality.
      *
      * @since [*next-version*]
      */
     use NormalizeStringCapableTrait;
 
-    /**
+    /*
      * Provides array normalization functionality.
      *
      * @since [*next-version*]
      */
     use NormalizeArrayCapableTrait;
 
-    /**
+    /*
      * Provides functionality for creating invalid argument exceptions.
      *
      * @since [*next-version*]
@@ -134,7 +134,7 @@ class PdoInsertResourceModel extends AbstractPdoResourceModel implements InsertC
      */
     use CreateNotFoundExceptionCapableTrait;
 
-    /**
+    /*
      * Provides string translating functionality.
      *
      * @since [*next-version*]
