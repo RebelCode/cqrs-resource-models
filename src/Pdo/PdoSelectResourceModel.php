@@ -5,6 +5,7 @@ namespace RebelCode\Storage\Resource\Pdo;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
 use Dhii\Expression\ExpressionInterface;
 use Dhii\Expression\LogicalExpressionInterface;
+use Dhii\Expression\TermInterface;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\Output\TemplateInterface;
 use Dhii\Storage\Resource\SelectCapableInterface;
@@ -18,7 +19,7 @@ use RebelCode\Storage\Resource\Pdo\Query\BuildSqlWhereClauseCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\EscapeSqlReferenceCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\GetPdoExpressionHashMapCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\GetPdoValueHashStringCapableTrait;
-use RebelCode\Storage\Resource\Pdo\Query\RenderSqlConditionCapableTrait;
+use RebelCode\Storage\Resource\Pdo\Query\RenderSqlExpressionCapableTrait;
 
 /**
  * Concrete implementation of a SELECT resource model for use with a PDO database connection.
@@ -88,7 +89,7 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
      *
      * @since [*next-version*]
      */
-    use RenderSqlConditionCapableTrait;
+    use RenderSqlExpressionCapableTrait;
 
     /*
      * Provides SQL table list storage functionality.
@@ -212,16 +213,6 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
      *
      * @since [*next-version*]
      */
-    protected function _getTemplateForSqlCondition(LogicalExpressionInterface $condition)
-    {
-        return $this->_getSqlConditionTemplate();
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @since [*next-version*]
-     */
     protected function _getSqlSelectFieldNames()
     {
         return $this->_getSqlFieldNames();
@@ -255,5 +246,25 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
     protected function _getSqlJoinType(ExpressionInterface $expression)
     {
         return 'INNER';
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    protected function _renderSqlCondition(LogicalExpressionInterface $condition, array $valueHashMap = [])
+    {
+        return $this->_renderSqlExpression($condition, $valueHashMap);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @since [*next-version*]
+     */
+    protected function _getTemplateForSqlExpression(TermInterface $expression)
+    {
+        return $this->_getSqlConditionTemplate();
     }
 }
