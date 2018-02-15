@@ -217,6 +217,11 @@ class PdoSelectResourceModelTest extends BaseDatabaseTestCase
         return $mock;
     }
 
+    /**
+     * Tests whether a valid instance of the test subject can be created.
+     *
+     * @since [*next-version*]
+     */
     public function testConstructor()
     {
         $pdo = $this->_getPdo();
