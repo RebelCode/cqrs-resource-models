@@ -28,8 +28,9 @@ use RebelCode\Storage\Resource\Pdo\Query\RenderSqlExpressionCapableTrait;
  * conditions. An optional field-to-column map may be provided which is used to translate consumer-friendly field names
  * to their actual column counterpart names.
  *
- * This implementation is also dependent on only a single template for rendering SQL conditions. The template instance
- * must be able to render any condition type. A delegate template is recommended.
+ * This implementation is also dependent on only a single template for rendering SQL expressions. The template instance
+ * must be able to render any expression, which may be simple terms, arithmetic expressions or logical expression
+ * conditions. A delegate template is recommended.
  *
  * @since [*next-version*]
  */
@@ -127,11 +128,11 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
     use SqlJoinConditionsAwareTrait;
 
     /*
-     * Provides SQL condition template storage functionality.
+     * Provides SQL expression template storage functionality.
      *
      * @since [*next-version*]
      */
-    use SqlConditionTemplateAwareTrait;
+    use SqlExpressionTemplateAwareTrait;
 
     /**
      * Provides string normalization functionality.
@@ -173,16 +174,16 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
      *
      * @since [*next-version*]
      *
-     * @param PDO                          $pdo               The PDO instance to use to prepare and execute queries.
-     * @param TemplateInterface            $conditionTemplate The template for rendering conditions.
-     * @param string[]|Stringable[]        $tables            The tables from which to SELECT from.
-     * @param string[]|Stringable[]        $fieldColumnMap    A map of field names to table column names.
-     * @param LogicalExpressionInterface[] $joins             A list of JOIN expressions to use in SELECT queries.
+     * @param PDO                          $pdo                The PDO instance to use to prepare and execute queries.
+     * @param TemplateInterface            $expressionTemplate The template for rendering SQL expressions.
+     * @param string[]|Stringable[]        $tables             The tables from which to SELECT from.
+     * @param string[]|Stringable[]        $fieldColumnMap     A map of field names to table column names.
+     * @param LogicalExpressionInterface[] $joins              A list of JOIN expressions to use in SELECT queries.
      */
-    public function __construct(PDO $pdo, TemplateInterface $conditionTemplate, $tables, $fieldColumnMap, $joins = [])
+    public function __construct(PDO $pdo, TemplateInterface $expressionTemplate, $tables, $fieldColumnMap, $joins = [])
     {
         $this->_setPdo($pdo);
-        $this->_setSqlConditionTemplate($conditionTemplate);
+        $this->_setSqlExpressionTemplate($expressionTemplate);
         $this->_setSqlTableList($tables);
         $this->_setSqlFieldColumnMap($fieldColumnMap);
         $this->_setSqlJoinConditions($joins);
@@ -265,6 +266,6 @@ class PdoSelectResourceModel extends AbstractPdoResourceModel implements SelectC
      */
     protected function _getTemplateForSqlExpression(TermInterface $expression)
     {
-        return $this->_getSqlConditionTemplate();
+        return $this->_getSqlExpressionTemplate();
     }
 }
