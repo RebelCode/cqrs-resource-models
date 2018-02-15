@@ -24,7 +24,15 @@ use RebelCode\Storage\Resource\Pdo\Query\GetPdoValueHashStringCapableTrait;
 use RebelCode\Storage\Resource\Pdo\Query\RenderSqlExpressionCapableTrait;
 
 /**
- * PdoUpdateResourceModel.
+ * Concrete implementation of an UPDATE resource model for use with a PDO database connection.
+ *
+ * This generic implementation can be instantiated to UPDATE records for a given table. An optional field-to-column
+ * map may be provided which is used to translate consumer-friendly field names to their actual column counterpart
+ * names.
+ *
+ * This implementation is also dependent on only a single template for rendering SQL expressions. The template instance
+ * must be able to render any expression, which may be simple terms, arithmetic expressions or logical expression
+ * conditions. A delegate template is recommended.
  *
  * @since [*next-version*]
  */
