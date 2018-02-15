@@ -19,7 +19,8 @@
         "dhii/exception-helper-base": "^0.1",
         "dhii/i18n-helper-base": "^0.1",
         "dhii/container-helper-base": "^0.1",
-        "dhii/data-container-base": "^0.1"
+        "dhii/data-container-base": "^0.1",
+        "dhii/iterator-helper-base": "^0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",

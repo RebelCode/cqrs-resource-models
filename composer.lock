@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "48e114dff989af0411e72f5630896d85",
+    "content-hash": "8c7d6a0d8d29b7cfbc27739af215d22c",
     "packages": [
         {
             "name": "dhii/config-interface",
@@ -871,6 +871,59 @@
             "time": "2017-03-13T12:08:29+00:00"
         },
         {
+            "name": "dhii/iterator-helper-base",
+            "version": "v0.1-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dhii/iterator-helper-base.git",
+                "reference": "10fabcefd8335732bdfd0884709aade8d63d31bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dhii/iterator-helper-base/zipball/10fabcefd8335732bdfd0884709aade8d63d31bf",
+                "reference": "10fabcefd8335732bdfd0884709aade8d63d31bf",
+                "shasum": ""
+            },
+            "require": {
+                "dhii/exception-helper-base": "^0.1",
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "<=0.3.2",
+                "dhii/invocable-interface": "0.1-alpha1",
+                "dhii/php-cs-fixer-config": "^0.1",
+                "dhii/stringable-interface": "^0.1",
+                "phpunit/phpunit": "^4.8",
+                "ptrofimov/xpmock": "dev-master"
+            },
+            "suggest": {
+                "dhii/callback-abstract": "For structural invocation of callables"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dhii\\Iterator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dhii Team",
+                    "email": "development@dhii.co"
+                }
+            ],
+            "description": "Common functionality for working with iterables",
+            "time": "2018-02-14T14:54:51+00:00"
+        },
+        {
             "name": "dhii/iterator-interface",
             "version": "dev-release/0.1",
             "source": {
@@ -1250,12 +1303,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/RebelCode/cqrs-resource-models-abstract.git",
-                "reference": "e5e726b33945849eb893a28e095a642f58b95f8b"
+                "reference": "853a89a7441360612330a173a67cbbecc106e72b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RebelCode/cqrs-resource-models-abstract/zipball/e5e726b33945849eb893a28e095a642f58b95f8b",
-                "reference": "e5e726b33945849eb893a28e095a642f58b95f8b",
+                "url": "https://api.github.com/repos/RebelCode/cqrs-resource-models-abstract/zipball/853a89a7441360612330a173a67cbbecc106e72b",
+                "reference": "853a89a7441360612330a173a67cbbecc106e72b",
                 "shasum": ""
             },
             "require": {
@@ -1295,7 +1348,7 @@
                 }
             ],
             "description": "Abstract functionality for a CQRS approach to resource models.",
-            "time": "2018-02-14T12:31:48+00:00"
+            "time": "2018-02-14T13:34:11+00:00"
         }
     ],
     "packages-dev": [
