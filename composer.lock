@@ -1303,12 +1303,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/RebelCode/cqrs-resource-models-abstract.git",
-                "reference": "b15adb87ac562aa716c3a132bbbec717f6b367c0"
+                "reference": "22bfbb32a1502055d461f04826fbb5a2a9d29171"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RebelCode/cqrs-resource-models-abstract/zipball/b15adb87ac562aa716c3a132bbbec717f6b367c0",
-                "reference": "b15adb87ac562aa716c3a132bbbec717f6b367c0",
+                "url": "https://api.github.com/repos/RebelCode/cqrs-resource-models-abstract/zipball/22bfbb32a1502055d461f04826fbb5a2a9d29171",
+                "reference": "22bfbb32a1502055d461f04826fbb5a2a9d29171",
                 "shasum": ""
             },
             "require": {
@@ -1348,7 +1348,7 @@
                 }
             ],
             "description": "Abstract functionality for a CQRS approach to resource models.",
-            "time": "2018-02-15T09:17:52+00:00"
+            "time": "2018-02-15T17:19:27+00:00"
         }
     ],
     "packages-dev": [
