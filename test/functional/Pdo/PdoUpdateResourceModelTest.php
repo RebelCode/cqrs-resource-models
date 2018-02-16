@@ -1,8 +1,7 @@
 <?php
 
-namespace RebelCode\Storage\Resource\FuncTest;
+namespace RebelCode\Storage\Resource\FuncTest\Pdo;
 
-use Dhii\Util\String\StringableInterface;
 use Dhii\Util\String\StringableInterface as Stringable;
 use PDO;
 use PHPUnit_Framework_MockObject_MockBuilder as MockBuilder;

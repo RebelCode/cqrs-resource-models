@@ -1,12 +1,12 @@
 <?php
 
-namespace RebelCode\Storage\Resource\FuncTest;
+namespace RebelCode\Storage\Resource\FuncTest\Pdo;
 
-use Dhii\Util\String\StringableInterface;
 use Dhii\Util\String\StringableInterface as Stringable;
+use PDO;
 use PHPUnit_Framework_MockObject_MockBuilder as MockBuilder;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use RebelCode\Storage\Resource\Pdo\PdoSelectResourceModel as TestSubject;
+use RebelCode\Storage\Resource\Pdo\PdoDeleteResourceModel as TestSubject;
 use RebelCode\Storage\Resource\TestStub\BaseDatabaseTestCase;
 
 /**
@@ -14,7 +14,7 @@ use RebelCode\Storage\Resource\TestStub\BaseDatabaseTestCase;
  *
  * @since [*next-version*]
  */
-class PdoSelectResourceModelTest extends BaseDatabaseTestCase
+class PdoDeleteResourceModelTest extends BaseDatabaseTestCase
 {
     /**
      * {@inheritdoc}
@@ -222,47 +222,42 @@ class PdoSelectResourceModelTest extends BaseDatabaseTestCase
      *
      * @since [*next-version*]
      */
-    public function testConstructor()
+    public function testCanBeCreated()
     {
         $pdo = $this->_getPdo();
         $template = $this->createTemplate();
-        $tables = [uniqid('table-'), uniqid('table-')];
+        $table = uniqid('table-');
         $fcMap = [
             'id'   => 'id',
             'name' => 'user_name',
             'age'  => 'user_age',
-            'id2'  => 'id_2',
         ];
-        $joins = [
-            uniqid('table-') => $this->createLogicalExpression(uniqid('type-'), []),
-            uniqid('table-') => $this->createLogicalExpression(uniqid('type-'), []),
-        ];
-
-        $subject = new TestSubject($pdo, $template, $tables, $fcMap, $joins);
+        $subject = new TestSubject($pdo, $template, $table, $fcMap);
 
         $this->assertInstanceOf(
-            'Dhii\Storage\Resource\SelectCapableInterface',
+            'Dhii\Storage\Resource\DeleteCapableInterface',
             $subject,
             'Test subject does not implement expected interface.'
         );
     }
 
     /**
-     * Tests the SELECT functionality when selecting from a single table and without any joins.
+     * Tests the DELETE functionality with a condition to assert whether the records in the database that satisfy it are
+     * actually deleted.
      *
      * @since [*next-version*]
      */
-    public function testSelectNoJoins()
+    public function testDeleteWithCondition()
     {
+        $pdo = $this->_getPdo();
         $table = 'users';
         $fcMap = [
             'id'   => 'id',
             'name' => 'user_name',
             'age'  => 'user_age',
         ];
-        $joins = [];
         $template = $this->createTemplate();
-        $subject = new TestSubject($this->_getPdo(), $template, [$table], $fcMap, $joins);
+        $subject = new TestSubject($this->_getPdo(), $template, $table, $fcMap);
 
         $condition = $this->createLogicalExpression(
             'greater_equal_to',
@@ -271,123 +266,43 @@ class PdoSelectResourceModelTest extends BaseDatabaseTestCase
                 $this->createLiteralTerm(20),
             ]
         );
-
         $pdoHash = hash('crc32b', 20);
-
         $template->expects($this->atLeastOnce())
                  ->method('render')
                  ->with($this->contains($condition))
                  ->willReturn('`users`.`user_age` > :' . $pdoHash);
 
-        $dataSet = $this->getDataSet();
-        $expected = [
-            $dataSet->getTable('users')->getRow(0),
-            $dataSet->getTable('users')->getRow(1),
-        ];
+        $subject->delete($condition);
 
-        $actual = $subject->select($condition);
+        $results = $pdo->query('SELECT * FROM `users` WHERE `user_age` >= 20')->fetchAll(PDO::FETCH_ASSOC);
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEmpty($results, 'Not all records where deleted.');
     }
 
     /**
-     * Tests the SELECT functionality when selecting from a single table and with join conditions.
+     * Tests the DELETE functionality without a condition to assert whether all the records in the target table
+     * are actually deleted.
      *
      * @since [*next-version*]
      */
-    public function testSelectWithJoins()
+    public function testDeleteNoCondition()
     {
-        $table = 'users';
+        $pdo = $this->_getPdo();
+        $table = 'comments';
         $fcMap = [
-            'id'   => 'id',
-            'name' => 'user_name',
-            'age'  => 'user_age',
-            'id2'  => 'id_2',
-        ];
-        $joins = [
-            'linked_accounts' => $this->createLogicalExpression(
-                'equal_to',
-                [
-                    $this->createEntityFieldTerm('linked_accounts', 'id_1'),
-                    $this->createEntityFieldTerm('user', 'id'),
-                ]
-            ),
+            'id'   => 'comment_id',
+            'name' => 'user_id',
+            'text' => 'comment',
         ];
         $template = $this->createTemplate();
-        $subject = new TestSubject($this->_getPdo(), $template, [$table], $fcMap, $joins);
+        $subject = new TestSubject($this->_getPdo(), $template, $table, $fcMap);
 
-        $template->expects($this->atLeastOnce())
-                 ->method('render')
-                 ->willReturn('`linked_accounts`.`id_1` = `users`.`id`');
+        $condition = null;
 
-        $dataSet = $this->getDataSet();
-        $expected = [
-            array_merge(
-                $dataSet->getTable('users')->getRow(0),
-                ['id_2' => $dataSet->getTable('linked_accounts')->getValue(1, 'id_2')]
-            ),
-            array_merge(
-                $dataSet->getTable('users')->getRow(1),
-                ['id_2' => $dataSet->getTable('linked_accounts')->getValue(0, 'id_2')]
-            ),
-        ];
+        $subject->delete($condition);
 
-        $actual = $subject->select();
+        $results = $pdo->query('SELECT * FROM `comments`')->fetchAll(PDO::FETCH_ASSOC);
 
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * Tests the SELECT functionality when selecting from multiple tables.
-     *
-     * @since [*next-version*]
-     */
-    public function testSelectMultipleTables()
-    {
-        $tables = ['users', 'comments'];
-        $fcMap = [
-            'id'         => 'id',
-            'name'       => 'user_name',
-            'age'        => 'user_age',
-            'comment_id' => 'comment_id',
-            'comment'    => 'comment',
-            'user_id'    => 'user_id',
-        ];
-        $joins = [];
-        $template = $this->createTemplate();
-        $subject = new TestSubject($this->_getPdo(), $template, $tables, $fcMap, $joins);
-
-        $condition = $this->createLogicalExpression(
-            'equal_to',
-            [
-                $this->createEntityFieldTerm('users', 'id'),
-                $this->createEntityFieldTerm('comments', 'user_id'),
-            ]
-        );
-
-        $template->expects($this->atLeastOnce())
-                 ->method('render')
-                 ->with($this->contains($condition))
-                 ->willReturn('`users`.`id` = `comments`.`user_id`');
-
-        $dataSet = $this->getDataSet();
-        $expected = [
-            array_merge(
-                $dataSet->getTable('users')->getRow(0),
-                $dataSet->getTable('comments')->getRow(1)
-            ),
-            array_merge(
-                $dataSet->getTable('users')->getRow(1),
-                $dataSet->getTable('comments')->getRow(0)
-            ),
-            array_merge(
-                $dataSet->getTable('users')->getRow(2),
-                $dataSet->getTable('comments')->getRow(2)
-            ),
-        ];
-
-        $actual = $subject->select($condition);
-
-        $this->assertEquals($expected, $actual);
+        $this->assertEmpty($results, 'Not all records where deleted.');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace RebelCode\Storage\Resource\FuncTest;
+namespace RebelCode\Storage\Resource\FuncTest\Pdo;
 
 use Dhii\Data\Container\Exception\NotFoundException;
 use PDO;
