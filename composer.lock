@@ -54,16 +54,16 @@
         },
         {
             "name": "dhii/container-helper-base",
-            "version": "v0.1-alpha3",
+            "version": "v0.1-alpha5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/container-helper-base.git",
-                "reference": "3c890f19ec8c9fa578a35b47b2ff1a897f087018"
+                "reference": "701dc8e6c5cbf5ab998fae8a7c178da86d69c4f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/container-helper-base/zipball/3c890f19ec8c9fa578a35b47b2ff1a897f087018",
-                "reference": "3c890f19ec8c9fa578a35b47b2ff1a897f087018",
+                "url": "https://api.github.com/repos/Dhii/container-helper-base/zipball/701dc8e6c5cbf5ab998fae8a7c178da86d69c4f1",
+                "reference": "701dc8e6c5cbf5ab998fae8a7c178da86d69c4f1",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
                 }
             ],
             "description": "Helper functionality for working with container.",
-            "time": "2018-02-01T17:30:19+00:00"
+            "time": "2018-02-16T13:22:06+00:00"
         },
         {
             "name": "dhii/cqrs-resource-model-interface",
@@ -633,16 +633,16 @@
         },
         {
             "name": "dhii/exception-interface",
-            "version": "dev-develop",
+            "version": "v0.2-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/exception-interface.git",
-                "reference": "a1fb5a8c55132f53dfb5312d4e15842c19bb4d5e"
+                "reference": "3ad3ba6a7c01197b7048db838c0bb74f6afb6fb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/exception-interface/zipball/a1fb5a8c55132f53dfb5312d4e15842c19bb4d5e",
-                "reference": "a1fb5a8c55132f53dfb5312d4e15842c19bb4d5e",
+                "url": "https://api.github.com/repos/Dhii/exception-interface/zipball/3ad3ba6a7c01197b7048db838c0bb74f6afb6fb8",
+                "reference": "3ad3ba6a7c01197b7048db838c0bb74f6afb6fb8",
                 "shasum": ""
             },
             "require": {
@@ -677,7 +677,7 @@
                 }
             ],
             "description": "Interfaces for most common exceptions",
-            "time": "2018-01-28T10:24:29+00:00"
+            "time": "2018-02-19T08:43:03+00:00"
         },
         {
             "name": "dhii/expression-interface",
@@ -1303,12 +1303,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/RebelCode/cqrs-resource-models-abstract.git",
-                "reference": "22bfbb32a1502055d461f04826fbb5a2a9d29171"
+                "reference": "f01e3b79822913eb97d167df9830b8334381b59a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RebelCode/cqrs-resource-models-abstract/zipball/22bfbb32a1502055d461f04826fbb5a2a9d29171",
-                "reference": "22bfbb32a1502055d461f04826fbb5a2a9d29171",
+                "url": "https://api.github.com/repos/RebelCode/cqrs-resource-models-abstract/zipball/f01e3b79822913eb97d167df9830b8334381b59a",
+                "reference": "f01e3b79822913eb97d167df9830b8334381b59a",
                 "shasum": ""
             },
             "require": {
@@ -1348,7 +1348,7 @@
                 }
             ],
             "description": "Abstract functionality for a CQRS approach to resource models.",
-            "time": "2018-02-15T17:19:27+00:00"
+            "time": "2018-02-19T11:30:57+00:00"
         }
     ],
     "packages-dev": [
@@ -1710,16 +1710,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.7.4",
+            "version": "1.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be"
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
-                "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/dfd6be44111a7c41c2e884a336cc4f461b3b2401",
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401",
                 "shasum": ""
             },
             "require": {
@@ -1769,7 +1769,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2018-02-11T18:49:29+00:00"
+            "time": "2018-02-19T10:16:54+00:00"
         },
         {
             "name": "phpunit/dbunit",
