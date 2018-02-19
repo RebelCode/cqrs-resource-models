@@ -7,7 +7,9 @@ use Dhii\Data\Container\ContainerHasCapableTrait;
 use Dhii\Data\Container\CreateContainerExceptionCapableTrait;
 use Dhii\Data\Container\CreateNotFoundExceptionCapableTrait;
 use Dhii\Data\Container\NormalizeContainerCapableTrait;
+use Dhii\Data\Container\NormalizeKeyCapableTrait;
 use Dhii\Exception\CreateInvalidArgumentExceptionCapableTrait;
+use Dhii\Exception\CreateOutOfRangeExceptionCapableTrait;
 use Dhii\I18n\StringTranslatingTrait;
 use Dhii\Storage\Resource\InsertCapableInterface;
 use Dhii\Util\Normalization\NormalizeArrayCapableTrait;
@@ -106,6 +108,13 @@ class PdoInsertResourceModel extends AbstractPdoResourceModel implements InsertC
      */
     use NormalizeStringCapableTrait;
 
+    /**
+     * Provides key normalization functionality.
+     *
+     * @since [*next-version*]
+     */
+    use NormalizeKeyCapableTrait;
+
     /*
      * Provides array normalization functionality.
      *
@@ -133,6 +142,13 @@ class PdoInsertResourceModel extends AbstractPdoResourceModel implements InsertC
      * @since [*next-version*]
      */
     use CreateNotFoundExceptionCapableTrait;
+
+    /**
+     * Provides functionality for creating out-of-range exceptions.
+     *
+     * @since [*next-version*]
+     */
+    use CreateOutOfRangeExceptionCapableTrait;
 
     /*
      * Provides string translating functionality.
